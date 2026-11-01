@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فرح عرندس | مصممة جرافيك وهوية بصرية</title>
+    
+    <!-- منع الوميض أو الترعيشة عند الفتح -->
+    <script>
+        if (localStorage.getItem('theme') !== 'light') {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: IBM Plex Sans Arabic -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            purple: '#83587f',
+                            lime: '#c9d863',
+                            beige: '#fff7f1',
+                            surface: '#f4e9e2',
+                            card: '#fffdfb',
+                            dark: '#332334',
+                            text: '#352a34',
+                            muted: '#6c5b69'
+                        },
+                        darkTheme: {
+                            bg: '#211824',
+                            surface: '#302331',
+                            card: '#3a2c3b',
+                            text: '#fff7f1',
+                            muted: '#bda3bc'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['IBM Plex Sans Arabic', 'sans-serif'],
+                    },
+                    borderRadius: {
+                        'xl-custom': '24px',
+                        '2xl-custom': '36px',
+                        '3xl-custom': '54px',
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 30px -5px rgba(131, 88, 127, 0.08)',
+                        'hover': '0 20px 40px -10px rgba(131, 88, 127, 0.18)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Cinematic Horizontal Marquee for Reviews */
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+        @keyframes marquee-rtl {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(50%); }
+        }
+        .animate-marquee-ltr {
+            display: flex;
+            width: max-content;
+            animation: marquee 35s linear infinite;
+        }
+        .animate-marquee-rtl {
+            display: flex;
+            width: max-content;
+            animation: marquee-rtl 35s linear infinite;
+        }
+        .marquee-container:hover .animate-marquee-ltr,
+        .marquee-container:hover .animate-marquee-rtl {
+            animation-play-state: paused;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(131, 88, 127, 0.05);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #83587f;
+            border-radius: 999px;
+        }
+
+        /* Print Specific Styling for ATS & A4 Single Page CV */
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 12mm;
+            }
+            body * {
+                visibility: hidden !important;
+                background: transparent !important;
+                color: #000 !important;
+                box-shadow: none !important;
+            }
+            #printable-cv, #printable-cv * {
+                visibility: visible !important;
+            }
+            #printable-cv {
+                position: absolute !important;
+                left: 0 !important;
+                top: 0 !important;
+                width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                display: block !important;
+                font-size: 11pt !important;
+                line-height: 1.4 !important;
+                color: #222 !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .page-break-inside-avoid {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body class="bg-brand-beige text-brand-text dark:bg-darkTheme-bg dark:text-darkTheme-text antialiased selection:bg-brand-lime selection:text-brand-dark transition-colors duration-300">
+
+    <!-- DATA CENTER & DATA INITIALIZATION SCRIPT -->
+    <script>
+        const PORTFOLIO_DATA = {
+            personal: {
+                name: { ar: "فرح عرندس", en: "Farah Arandas" },
+                title: { ar: "مصممة جرافيك وهوية بصرية", en: "Graphic Designer & Brand Specialist" },
+                bio: {
+                    ar: "مش مجرد معرض أعمال، بل مساحة متكاملة لاستعراض الإبداع وبناء الهويات البصرية المتميزة وتصاميم السوشيال ميديا للمتاجر والمشاريع الناشئة مع تركيز خاص على السوق الخليجي.",
+                    en: "Not just a portfolio, but an interactive space to showcase creative visual identities, branding, and social media design for startups."
+                },
+                location: { ar: "غزة، فلسطين", en: "Gaza, Palestine" },
+                email: "faraharandas1@gmail.com",
+                phone: "+970 595 402 383",
+                whatsapp: "970595402383"
+            },
+            cv: {
+                modalTitle: { ar: "معاينة السيرة الذاتية (A4 ATS Ready)", en: "CV Preview (A4 ATS Ready)" },
+                printBtn: { ar: "طباعة / حفظ كـ PDF", en: "Print / Save PDF" },
+                summaryHeading: { ar: "الملخص المهني", en: "Professional Summary" },
+                summaryText: { 
+                    ar: "مصممة جرافيك متخصصة بالهويات البصرية وتصاميم السوشيال ميديا للمتاجر والمشاريع الناشئة مع تركيز على السوق الخليجي. متمكنة من أدوات التصميم الاحترافية وشغوفة بتحويل أفكار العلامات التجارية إلى حلول بصرية مبدعة.",
+                    en: "Graphic Designer specializing in brand identity and social media design for e-commerce and startups focusing on the Gulf market. Proficient in creative software suite and passionate about transforming brand ideas into impactful visual solutions."
+                },
+                educationHeading: { ar: "التعليم والتخصص", en: "Education" },
+                educationText: {
+                    ar: "بكالوريوس تكنولوجيا الوسائط المتعددة (Multimedia Technology) - الكلية الجامعية للعلوم التطبيقية (UCAS)، غزة (تاريخ التخرج المتوقع: 2026)",
+                    en: "Bachelor of Multimedia Technology - University College of Applied Sciences (UCAS), Gaza (Expected Graduation: 2026)"
+                },
+                experienceHeading: { ar: "الخبرة العملية", en: "Work Experience" },
+                expRole: { ar: "مصممة جرافيك مستقلة (Freelance Graphic Designer)", en: "Freelance Graphic Designer" },
+                expDuration: { ar: "سبتمبر 2023 - الحالي", en: "September 2023 - Present" },
+                expPoints: [
+                    { ar: "تصميم وتنفيذ أكثر من 50 مشروع هوية بصرية وحملات إعلانية ناجحة.", en: "Designed and produced 50+ successful visual identity projects and ad campaigns." },
+                    { ar: "إدارة خطط المحتوى البصري لمتاجر إلكترونية وحسابات تجارية في الخليج العربي.", en: "Managed visual content design for e-commerce stores and brand accounts in the GCC." }
+                ],
+                skillsHeading: { ar: "البرامج والمهارات", en: "Software & Skills" },
+                skillsText: "Photoshop, Illustrator, InDesign, After Effects, Branding, Social Media, Packaging Design.",
+                languagesHeading: { ar: "اللغات", en: "Languages" },
+                languagesText: { ar: "العربية (اللغة الأم) | الإنجليزية (متقدم)", en: "Arabic (Native) | English (Advanced)" }
+            },
+            contactOptions: {
+                projTypes: [
+                    { ar: "هوية بصرية كاملة / Branding", en: "Full Brand Identity / Branding" },
+                    { ar: "سوشيال ميديا / Social Media", en: "Social Media Design" },
+                    { ar: "تغليف وعبوات / Packaging", en: "Packaging Design" }
+                ],
+                services: [
+                    { ar: "تصميم جديد من الصفر", en: "New Project From Scratch" },
+                    { ar: "تطوير وتحديث تصميم حالي", en: "Develop/Update Existing Design" }
+                ],
+                deadlines: [
+                    { ar: "عاجل (خلال أسبوع)", en: "Urgent (Within a week)" },
+                    { ar: "خلال أسبوعين", en: "Within two weeks" },
+                    { ar: "مرن / غير مستعجل", en: "Flexible / Not urgent" }
+                ]
+            },
+            stats: [
+                {
+                    target: 50,
+                    suffix: "+",
+                    label: { ar: "مشروع وهوية بصرية", en: "Projects & Branding" },
+                    icon: "fa-layer-group"
+                },
+                {
+                    target: 99,
+                    suffix: "%",
+                    label: { ar: "رضا العملاء والتقييمات", en: "Client Satisfaction" },
+                    icon: "fa-face-smile"
+                },
+                {
+                    target: 3,
+                    suffix: "+",
+                    label: { ar: "سنوات من الخبرة والإبداع", en: "Years Experience" },
+                    icon: "fa-award"
+                },
+                {
+                    target: 5,
+                    suffix: "+",
+                    label: { ar: "دول في السوق الخليجي والعربي", en: "Regional Markets" },
+                    icon: "fa-earth-americas"
+                }
+            ],
+            links: {
+                instagram: "https://www.instagram.com/itsfarah.ps/",
+                facebook: "https://www.facebook.com/profile.php?id=61595786076023",
+                mostaql: "https://mostaql.com/u/Farah_Arandas",
+                khamsat: "https://khamsat.com/user/farah_arandas",
+                linkedin: "https://www.linkedin.com/in/farah-arandas-283194444/"
+            },
+            softwareIcons: [
+                { name: "Photoshop", icon: "Ps", color: "#31A8FF", desc: { ar: "معالجة الصور والدمج", en: "Image Editing" } },
+                { name: "Illustrator", icon: "Ai", color: "#FF9A00", desc: { ar: "الشعارات والهويات", en: "Vector & Logos" } },
+                { name: "InDesign", icon: "Id", color: "#FF3366", desc: { ar: "المطبوعات والتنسيق", en: "Print & Layout" } },
+                { name: "After Effects", icon: "Ae", color: "#9999FF", desc: { ar: "المووشن والتحريك", en: "Motion Graphics" } }
+            ],
+            services: [
+                {
+                    id: "social-media",
+                    title: { ar: "تصاميم التواصل الاجتماعي", en: "Social Media Design" },
+                    desc: { ar: "تصاميم احترافية متكاملة للحملات الإعلانية والبوستات تضمن أعلى معدلات تفاعل وتحافظ على هوية الحساب.", en: "High-engaging visual campaigns and templates custom-designed to build brand presence." },
+                    icon: "fa-hashtag"
+                },
+                {
+                    id: "branding",
+                    title: { ar: "الهوية البصرية والطباعة", en: "Brand Identity & Print" },
+                    desc: { ar: "بناء دليل هوية بصرية كامل (شعارات، ألوان، خطوط، وبطاقات عمل) يعكس قيم مشروعك.", en: "Comprehensive brand identity kits including logos, color systems, and stationery guides." },
+                    icon: "fa-paint-brush"
+                },
+                {
+                    id: "packaging",
+                    title: { ar: "تصميم العبوات والتغليف", en: "Packaging Design" },
+                    desc: { ar: "تصميم عبوات وأغلفة منتجات جاذبة للأنظار، مطابقة لمواصفات المطابع ومستعدة للإنتاج المباشر.", en: "Market-ready packaging and label designs prepared precisely for printing." },
+                    icon: "fa-box"
+                }
+            ],
+ projects: [
+    {
+        id: "proj-company-profile",
+        category: "branding",
+        categoryLabel: { ar: "هوية بصرية ومطبوعات", en: "Branding & Print" },
+        title: { ar: "تصميم بروفايل تعريفي لشركة مداد العقارية (شاليهات نوفا)", en: "Midad Realty Corporate Profile Design (Nova Chalets)" },
+        coverImage: "img/real-estate-profile-cover.png",
+        gallery: [
+            "img/مداد-01.png",
+            "img/مداد-02.png",
+            "img/مداد-03.png",
+            "img/مداد-04.png",
+            "img/مداد-05.png",
+            "img/مداد-06.png",
+            "img/مداد-07.png",
+            "img/مداد-08.png",
+            "img/مداد-09.png",
+            "img/مداد-10.png",
+            "img/مداد-11.png",
+        ],
+        brief: { 
+            ar: "تصميم بروفايل تعريفي استثماري متكامل لمشروع 'شاليهات مداد (Nova Chalets)' يجمع بين الخصوصية، الرفاهية، والعائد الاستثمارى الواعد لـ 5 وحدات عصرية.", 
+            en: "Designing a comprehensive investment corporate profile for 'Nova Chalets' by Midad Realty, combining privacy, luxury, and promising investment returns." 
+        },
+        challenge: { 
+            ar: "تنسيق وإبراز تفاصيل المشروع الاستثمارية، الميزات المعمارية الحديثة، وموقع الوحدات الاستراتيجي بين قرية الأشقر ومدينة قلقيلية بأسلوب بصري راقٍ وجذاب للمستثمرين.", 
+            en: "Structuring and highlighting the project's investment details, modern architectural features, and strategic location between Al-Ashqar village and Qalqilya in an upscale layout." 
+        },
+        role: { ar: "مصممة هوية بصرية ومطبوعات", en: "Brand Identity & Print Designer" },
+        tools: ["InDesign", "Illustrator", "Photoshop"],
+        outcome: { 
+            ar: "إخراج بروفايل تعريفي احترافي يعرض رؤية المشروع، مميزاته الفريدة، والفرص الاستثمارية المرنة (تملك كامل أو حصص) بأسلوب بصري يعزز ثقة المستثمرين.", 
+            en: "Delivered a professional corporate profile showcasing project vision, unique features, and flexible investment opportunities to enhance investor confidence." 
+        }
+    },
+    {
+        id: "proj-real-estate",
+        category: "social-media",
+        categoryLabel: { ar: "سوشيال ميديا", en: "Social Media" },
+        title: { ar: "حملة ترويجية لعقارات سكنية فاخرة", en: "Luxury Residential Real Estate Campaign" },
+        coverImage: "img/real-estate-cover.png",
+        gallery: [
+            "img/midad1.png",
+            "img/midad2.png",
+            "img/midad3.png",
+            "img/midad4.png"
+        ],
+        brief: { 
+            ar: "تصميم سلسلة بوستات إعلانية وتصاميم تسويقية لفلل ووحدات سكنية عصرية تجمع بين الخصوصية والرفاهية.", 
+            en: "Designing a series of promotional ad posts and marketing visuals for modern residential villas combining privacy and luxury." 
+        },
+        challenge: { 
+            ar: "إبراز فخامة التصميم المعماري، الخصوصية التامة، والمميزات الاستثمارية بأسلوب بصري راقٍ وجذاب.", 
+            en: "Highlighting the luxury of architectural design, absolute privacy, and investment features in an upscale and engaging visual style." 
+        },
+        role: { ar: "مصممة سوشيال ميديا وهويات تسويقية", en: "Social Media & Marketing Designer" },
+        tools: ["Photoshop", "Illustrator"],
+        outcome: { 
+            ar: "إعداد حملة بصرية متكاملة عززت من التفاعل والوصول للجمهور المستهدف بطريقة احترافية.", 
+            en: "Created an integrated visual campaign that boosted engagement and effectively reached the target audience." 
+        }
+    },
+    {
+        id: "proj-2",
+        category: "packaging",
+        categoryLabel: { ar: "تغليف", en: "Packaging" },
+        title: { ar: "تصميم تغليف علبة شمعة عطرية «عبق الشرق»", en: "Abaq Al-Sharq Luxury Candle Packaging" },
+        coverImage: "img/packge1.png",
+        gallery: [
+            "img/packge.png",
+            "img/die1.png",
+            "img/d4.png",
+            "img/d3.png",
+            "img/d5.png"
+        ],
+        brief: { 
+            ar: "تصميم صندوق تغليف فاخر لشمعة عطرية (العود، العنبر، وخشب الصندل) بطابع شرقي أصيل يعكس الفخامة.", 
+            en: "Designing a luxury packaging box for a scented candle (Oud, Amber, and Sandalwood) with an authentic oriental theme." 
+        },
+        challenge: { 
+            ar: "ترجمة روح الفخامة الشرقية وعبق العود والعنبر في تصميم هيكلي متناسق لعلبة شمعة بقطر 7 سم وارتفاع 10 سم.", 
+            en: "Translating oriental luxury and the essence of oud and amber into a harmonious structural design for a 7x10cm candle box." 
+        },
+        role: { ar: "مصممة تغليف وهويات بصرية", en: "Packaging & Brand Identity Designer" },
+        tools: ["Illustrator", "Photoshop"],
+        outcome: { 
+            ar: "إنتاج تصميم متكامل للعلبة يدمج الهوية البصرية، تفاصيل المكونات، ومعلومات العناية بأسلوب راقٍ جاهز للطباعة.", 
+            en: "Produced an integrated packaging design blending brand identity, ingredient details, and care instructions ready for print."
+        }
+    },
+    {
+        id: "proj-law-firm",
+        category: "social-media",
+        categoryLabel: { ar: "سوشيال ميديا", en: "Social Media" },
+        title: { ar: "تصميم منشورات كاروسيل توعوية لمكتب محاماة", en: "Law Firm Educational Carousel Posts" },
+        coverImage: "img/law1.png",
+        gallery: [
+            "img/law2.png",
+            "img/law3.png"
+        ],
+        brief: { 
+            ar: "تصميم منشورات كاروسيل (Carousel) تفاعلية وتعليمية لمكتب محاماة، تعرض نصائح قانونية وإجراءات التأسيس بخطوات سلسة وجذابة.", 
+            en: "Designing interactive and educational carousel posts for a law firm, showcasing legal tips and establishment procedures in smooth, engaging steps." 
+        },
+        challenge: { 
+            ar: "توزيع النصوص القانونية الطويلة على شرائح متعددة بأسلوب بصري مترابط يمنع الملل ويحافظ على اهتمام المتابع حتى الشريحة الأخيرة.", 
+            en: "Distributing long legal texts across multiple slides in a cohesive visual style that prevents boredom and retains reader engagement till the end." 
+        },
+        role: { ar: "مصممة سوشيال ميديا ومحتوى بصري", en: "Social Media & Visual Content Designer" },
+        tools: ["Photoshop", "Illustrator"],
+        outcome: { 
+            ar: "تصميم شرائح كاروسيل احترافية حققت تفاعلاً عالياً ومعدل حفظ ومشاركة واسع بين المتابعين.", 
+            en: "Designed professional carousel slides that achieved high engagement, saves, and shares among followers." 
+        }
+    },
+    {
+        id: "proj-3",
+        category: "branding",
+        categoryLabel: { ar: "هوية بصرية", en: "Branding" },
+        title: { ar: "أثر | هوية بصرية لمتحف رقمي", en: "Athar | Brand Identity for a Digital Museum" },
+        coverImage: "img/athar.png",
+        gallery: [
+           "img/الهوية البصرية-01.png",
+           "img/الهوية البصرية-02.png",
+           "img/الهوية البصرية-03.png",
+           "img/الهوية البصرية-04.png",
+           "img/الهوية البصرية-05.png",
+           "img/الهوية البصرية-06.png",
+           "img/الهوية البصرية-07.png",
+           "img/الهوية البصرية-08.png",
+           "img/الهوية البصرية-09.png",
+           "img/الهوية البصرية-10.png",
+           "img/الهوية البصرية-11.png",
+           "img/الهوية البصرية-12.png",
+        ],
+        brief: {
+            ar: "تصميم هوية بصرية متكاملة لمشروع \"أثر\"، متحف رقمي تفاعلي بالواقع الافتراضي يوثّق ذاكرة غزة ويحفظها .",
+            en: "A complete brand identity for \"Athar\", an interactive VR digital museum documenting and preserving the memory of Gaza ."
+        },
+        challenge: {
+            ar: "بناء هوية تحمل ثقل الذاكرة والتراث دون أن تبدو تقليدية أو حزينة، وتصلح للاستخدام الرقمي وواجهات الواقع الافتراضي.",
+            en: "Building an identity that carries the weight of memory and heritage without feeling traditional or somber, and works across digital and VR interfaces."
+        },
+        role: { ar: "مصممة هوية بصرية", en: "Brand Designer" },
+        tools: ["Illustrator"],
+        outcome: {
+            ar: "هوية متماسكة بنسختين عربية وإنجليزية، وبألوان فاتحة وداكنة، جاهزة للتطبيق على واجهة المتحف الافتراضي والمطبوعات.",
+            en: "A cohesive bilingual identity with light and dark versions, ready for the virtual museum interface and print applications."
+        }
+    },
+    {
+        id: "proj-aushalh-social",
+        category: "social-media",
+        categoryLabel: { ar: "سوشيال ميديا", en: "Social Media" },
+        title: { ar: "حملة إعلانية وتصاميم سوشيال ميديا لشركة أوشيح للاستقدام", en: "Aushalh Recruitment Social Media & Ad Campaign" },
+        coverImage: "img/coverE.jpg",
+        gallery: [
+            "img/3.jpg",
+            "img/3-1.jpg",
+            "img/3-2.jpg",
+            "img/3-3.jpg"
+        ],
+        brief: { 
+            ar: "تصميم سلسلة بوستات إعلانية ومنشورات سوشيال ميديا لشركة أوشيح لاستقدام العاملات، تبرز خدمات استقدام العمالة المنزلية المدربة من إثيوبيا بأسعار تنافسية ومدة استقدام سريعة.", 
+            en: "Designing a series of social media ad posts and visuals for Aushalh Recruitment Company, highlighting professional domestic worker recruitment from Ethiopia with competitive prices." 
+        },
+        challenge: { 
+            ar: "تصميم محتوى بصري جذاب يسهل على العملاء قراءة التفاصيل المهمة مثل مدة الاستقدام، الأسعار، وطرق التواصل عبر الباركود ووسائل الاتصال المباشرة.", 
+            en: "Designing engaging visual content that makes it easy for clients to read crucial details such as recruitment duration, pricing, and direct contact options." 
+        },
+        role: { ar: "مصممة سوشيال ميديا ومحتوى تسويقي", en: "Social Media & Marketing Content Designer" },
+        tools: ["Photoshop", "Illustrator"],
+        outcome: { 
+            ar: "إنتاج تصاميم سوشيال ميديا احترافية وواضحة عززت من الهوية التسويقية للشركة وزادت من تفاعل الجمهور المستهدف.", 
+            en: "Produced professional and clear social media designs that enhanced the company's marketing identity and boosted target audience engagement." 
+        }
+    }
+],
+            reviews: [
+                {
+                    client: { ar: "خالد", en: "Khaled" },
+                    country: { ar: "السعودية", en: "Saudi Arabia" },
+                    comment: { ar: "ما شاء الله مبدعة جدًا في التصاميم وأنصح الجميع بالتعامل معها", en: "Maasha Allah, very creative in designs and I recommend everyone to work with her." }
+                },
+                {
+                    client: { ar: "منصة shey hub", en: "Shey Hub Platform" },
+                    country: { ar: "الإمارات", en: "UAE" },
+                    comment: { ar: "شغل نظيف جدًا", en: "Very clean work." }
+                },
+                {
+                    client: { ar: "شركة نقشة", en: "Naqsha Company" },
+                    country: { ar: "السعودية", en: "Saudi Arabia" },
+                    comment: { ar: "ممتازة وسريعة في الأداء وعملها متقن", en: "Excellent, fast in performance, and meticulous work." }
+                },
+                {
+                    client: { ar: "محمد", en: "Mohammed" },
+                    country: { ar: "العراق", en: "Iraq" },
+                    comment: { ar: "لا يوجد وصف يعطي حقكم نسأل الله لكم التوفيق والنجاح الدائم", en: "No description can give you justice, we ask Allah to grant you success." }
+                },
+                {
+                    client: { ar: "عادل", en: "Adel" },
+                    country: { ar: "السعودية", en: "Saudi Arabia" },
+                    comment: { ar: "جزيل الشكر للاستاذة المتميزة فرح ، كانت بحق أهلا للثقة في تصميم بروفايل لمؤسستى ( تصميم أنيق و أكثر من رائع ) انصح بالتعامل معها بشدة.", en: "Many thanks to the distinguished designer Farah, highly trusted for institutional profile design." }
+                },
+                {
+                    client: { ar: "حذيفة", en: "Huthaifa" },
+                    country: { ar: "السعودية", en: "Saudi Arabia" },
+                    comment: { ar: "فرح يسرني حقاً العمل معك. كان تفانيك عاملاً حاسماً في تحقيق أهدافنا. تصميمك ليس مجرد عمل، بل هو قيمة مضافة حقيقية لعلامتنا التجارية. شكراً لك على هذا الالتزام.", en: "Farah, it was a pleasure working with you. Your dedication was crucial to achieving our goals." }
+                },
+                {
+                    client: { ar: "مؤسسة تواجد", en: "Tawajud Foundation" },
+                    country: { ar: "السعودية", en: "Saudi Arabia" },
+                    comment: { ar: "عمل رائع ومجهود مميز ... شكرا لك يأستاذة فرح", en: "Wonderful work and distinct effort... Thank you, Farah." }
+                },
+                {
+                    client: { ar: "أ. محمد", en: "Mr. Mohammed" },
+                    country: { ar: "السعودية", en: "Saudi Arabia" },
+                    comment: { ar: "مو اول مرة اتعامل معاها ومارح تكون الأخيرة ممتازة الله يعطيك العافية", en: "Not the first time working with her and won't be the last, excellent." }
+                },
+
+                {
+                    client: { ar: "شركة ميبل", en: "MAPLE DESIGN" },
+                    country: { ar: "السعودية", en: "Saudi Arabia" },
+                    comment: { ar:"سررت بالتعامل مع الاستاذه فرح اخذت عندها بكج ٤ بوسترات وكانت جدا جميله وراقيه وباذن الله لن يكون التعامل الاخير معها",en: "It was a pleasure working with Ms. Farah. I ordered a package of four posters from her, and they were beautiful and elegant. God willing, this won't be the last time we work together0"}
+                }
+            ],
+            faqs: [
+                {
+                    q: { ar: "ما هي خطوات بدء مشروع جديد؟", en: "How do we start working on a new project?" },
+                    a: { ar: "مناقشة المشروع، تحديد الميزانية والجدول الزمني، ثم تقديم النماذج الأولى للمراجعة والتعديل حتى الاعتماد النهائي.", en: "Discussing the project, defining scope and timeline, then presenting initial concepts for feedback." }
+                },
+                {
+                    q: { ar: "هل تسلمين الملفات المصدرية القابلة للتعديل؟", en: "Do you deliver source editable files?" },
+                    a: { ar: "نعم، يتم تسليم كافة الملفات المصدرية (AI, PSD) بجودة عالية بالإضافة إلى صيغ (PNG, PDF) للاستخدام الرقمي والطباعي.", en: "Yes, all source files are delivered in high quality along with standard formats." }
+                }
+            ]
+        };
+    </script>
+
+    <!-- HEADER / NAVIGATION BAR -->
+    <header class="sticky top-0 z-40 backdrop-blur-md bg-brand-beige/80 dark:bg-darkTheme-bg/80 border-b border-brand-purple/10 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#hero" class="flex items-center gap-3 group">
+                <img src="img/logo.png" alt="Farah Arandas" class="w-11 h-11 rounded-full object-cover group-hover:scale-105 transition-transform shadow-sm">
+                <div>
+                    <span class="block font-bold text-lg leading-tight tracking-tight text-brand-dark dark:text-brand-beige" id="nav-brand-name">فرح عرندس</span>
+                    <span class="block text-xs text-brand-muted dark:text-darkTheme-muted" id="nav-brand-title">مصممة جرافيك</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="#work" class="hover:text-brand-purple dark:hover:text-brand-lime transition-colors" id="nav-link-work">أعمالي</a>
+                <a href="#services" class="hover:text-brand-purple dark:hover:text-brand-lime transition-colors" id="nav-link-services">خدماتي</a>
+                <a href="#reviews" class="hover:text-brand-purple dark:hover:text-brand-lime transition-colors" id="nav-link-reviews">الآراء</a>
+                <a href="#contact" class="hover:text-brand-purple dark:hover:text-brand-lime transition-colors" id="nav-link-contact">تواصل معي</a>
+            </nav>
+
+            <!-- Controls: Lang Switch & Theme Toggle & CV Button -->
+            <div class="flex items-center gap-3">
+                <button onclick="openPrintableCV()" class="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 text-xs font-semibold rounded-full bg-brand-purple/10 text-brand-purple dark:bg-brand-lime/20 dark:text-brand-lime hover:bg-brand-purple hover:text-white dark:hover:bg-brand-lime dark:hover:text-brand-dark transition-all" title="Print/Download CV">
+                    <i class="fa-solid fa-file-pdf"></i>
+                    <span id="nav-cv-btn">السيرة الذاتية</span>
+                </button>
+
+                <button onclick="toggleLanguage()" class="px-3 py-1.5 text-xs font-bold rounded-full border border-brand-purple/20 hover:border-brand-purple dark:border-white/20 transition-all flex items-center gap-1.5">
+                    <i class="fa-solid fa-globe text-brand-purple dark:text-brand-lime"></i>
+                    <span id="lang-btn-text">English</span>
+                </button>
+
+                <!-- زر التبديل -->
+                <button onclick="toggleTheme()" class="w-9 h-9 rounded-full border border-brand-purple/20 flex items-center justify-center hover:bg-brand-surface dark:hover:bg-darkTheme-surface transition-all text-brand-purple dark:text-brand-lime" aria-label="Toggle Theme">
+                    <i class="fa-solid fa-moon dark:hidden"></i>
+                    <i class="fa-solid fa-sun hidden dark:block"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Scrollable Pill Navigation -->
+        <div class="md:hidden overflow-x-auto no-scrollbar px-4 py-2 border-t border-brand-purple/5 flex items-center gap-2 whitespace-nowrap text-xs font-medium bg-brand-surface/50 dark:bg-darkTheme-surface/50">
+            <a href="#work" class="px-3 py-1.5 rounded-full bg-brand-card dark:bg-darkTheme-card border border-brand-purple/10 shadow-sm" id="m-nav-work">الأعمال</a>
+            <a href="#services" class="px-3 py-1.5 rounded-full bg-brand-card dark:bg-darkTheme-card border border-brand-purple/10 shadow-sm" id="m-nav-services">الخدمات</a>
+            <a href="#reviews" class="px-3 py-1.5 rounded-full bg-brand-card dark:bg-darkTheme-card border border-brand-purple/10 shadow-sm" id="m-nav-reviews">الآراء</a>
+            <a href="#contact" class="px-3 py-1.5 rounded-full bg-brand-card dark:bg-darkTheme-card border border-brand-purple/10 shadow-sm" id="m-nav-contact">تواصل</a>
+            <button onclick="openPrintableCV()" class="px-3 py-1.5 rounded-full bg-brand-purple text-white dark:bg-brand-lime dark:text-brand-dark font-bold" id="m-nav-cv">PDF CV</button>
+        </div>
+    </header>
+
+    <main class="overflow-hidden">
+        <!-- HERO SECTION -->
+        <section id="hero" class="relative py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
+            <div class="flex-1 space-y-6 text-center md:text-start">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-lime/30 text-brand-dark dark:bg-brand-lime/20 dark:text-brand-lime text-xs font-semibold tracking-wide">
+                    <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                    <span id="hero-status">متاحة لاستلام المشاريع الجديدة</span>
+                </div>
+                
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-brand-dark dark:text-brand-beige">
+                    <span id="hero-greeting" class="block mb-2">أهلاً بك،</span>
+                    <span class="text-brand-purple dark:text-brand-lime block" id="hero-name-display">فرح عرندس</span>
+                </h1>
+
+                <p class="text-base sm:text-lg text-brand-muted dark:text-darkTheme-muted max-w-2xl leading-relaxed" id="hero-tagline">
+                    مش مجرد معرض أعمال، بل مساحة متكاملة لاستعراض الإبداع وبناء الهويات البصرية المتميزة وتصاميم السوشيال ميديا.
+                </p>
+
+                <div class="flex flex-wrap items-center justify-center md:justify-start gap-4 pt-4">
+                    <a href="#work" class="px-8 py-4 rounded-full bg-brand-purple text-brand-beige dark:bg-brand-lime dark:text-brand-dark font-bold shadow-soft hover:shadow-hover hover:-translate-y-1 transition-all duration-300 flex items-center gap-2">
+                        <span id="hero-btn-work">شاهد أعمالي</span>
+                        <i class="fa-solid fa-arrow-left rtl:rotate-0 ltr:rotate-180 text-xs"></i>
+                    </a>
+                    <button onclick="openPrintableCV()" class="px-8 py-4 rounded-full bg-brand-surface dark:bg-darkTheme-surface border border-brand-purple/20 text-brand-text dark:text-brand-beige font-bold hover:bg-brand-purple hover:text-white dark:hover:bg-brand-lime dark:hover:text-brand-dark hover:-translate-y-1 transition-all duration-300 flex items-center gap-2">
+                        <i class="fa-solid fa-download"></i>
+                        <span id="hero-btn-cv">تحميل السيرة الذاتية</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- صورة الشخصية مع هالة بصرية -->
+            <div class="relative flex items-center justify-center shrink-0">
+                <div class="absolute w-80 h-80 sm:w-96 sm:h-96 rounded-full bg-gradient-to-tr from-brand-purple/20 to-brand-purple/40 blur-md"></div>
+                <div class="relative w-72 h-72 sm:w-80 sm:h-80 rounded-full p-2 bg-gradient-to-tr from-brand-purple to-brand-purple/65 shadow-2xl overflow-hidden flex items-center justify-center bg-brand-surface dark:bg-darkTheme-surface">
+                    <img src="img/farah.png" alt="فرح عرندس" class="w-full h-full object-cover rounded-full">
+                </div>
+            </div>
+        </section>
+
+        <!-- STATS SECTION -->
+        <section class="py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6" id="stats-grid"></div>
+        </section>
+
+        <!-- SOFTWARE ICONS SECTION -->
+        <section class="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-6">
+            <h3 class="text-center font-bold text-sm tracking-wider uppercase text-brand-purple dark:text-brand-lime" id="sw-section-title">برامج التصميم المعتمدة</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-4xl mx-auto" id="software-icons-grid"></div>
+        </section>
+
+        <!-- PORTFOLIO / GRID WORKS SECTION WITH FILTERING -->
+        <section id="work" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="text-center space-y-4 mb-10">
+                <span class="text-xs font-bold tracking-widest text-brand-purple dark:text-brand-lime uppercase" id="work-subtitle">معرض الأعمال</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-dark dark:text-brand-beige" id="work-title">أعمال مختارة</h2>
+            </div>
+            
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-12" id="filter-buttons">
+                <button onclick="filterProjects('all')" data-filter="all" class="filter-btn px-5 py-2 rounded-full text-xs font-bold bg-brand-purple text-white dark:bg-brand-lime dark:text-brand-dark transition-all">الكل</button>
+                <button onclick="filterProjects('branding')" data-filter="branding" class="filter-btn px-5 py-2 rounded-full text-xs font-bold bg-brand-surface dark:bg-darkTheme-surface text-brand-text dark:text-darkTheme-text hover:bg-brand-purple/20 transition-all">هوية بصرية ومطبوعات</button>
+                <button onclick="filterProjects('social-media')" data-filter="social-media" class="filter-btn px-5 py-2 rounded-full text-xs font-bold bg-brand-surface dark:bg-darkTheme-surface text-brand-text dark:text-darkTheme-text hover:bg-brand-purple/20 transition-all">سوشيال ميديا</button>
+                <button onclick="filterProjects('packaging')" data-filter="packaging" class="filter-btn px-5 py-2 rounded-full text-xs font-bold bg-brand-surface dark:bg-darkTheme-surface text-brand-text dark:text-darkTheme-text hover:bg-brand-purple/20 transition-all">تغليف</button>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8" id="projects-grid"></div>
+        </section>
+
+        <!-- SERVICES SECTION -->
+        <section id="services" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="text-center space-y-4 mb-12">
+                <span class="text-xs font-bold tracking-widest text-brand-purple dark:text-brand-lime uppercase" id="services-subtitle">ماذا أقدم؟</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-dark dark:text-brand-beige" id="services-title">خدمات تصميم احترافية لتنمية مشروعك</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="services-grid"></div>
+        </section>
+
+       <!-- CLIENT REVIEWS SECTION -->
+        <section id="reviews" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center space-y-4 mb-10">
+                <span class="text-xs font-bold tracking-widest text-brand-purple dark:text-brand-lime uppercase" id="reviews-subtitle">آراء العملاء</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-dark dark:text-brand-beige" id="reviews-title">ماذا يقول العملاء عن التعامل معي؟</h2>
+            </div>
+            
+            <!-- تم تقليل الـ Radius هنا إلى rounded-xl ليصبح الإطار متناسقاً ولا يقص الكروت بشكل حاد -->
+            <div class="w-full overflow-hidden relative rounded-xl border border-brand-purple/10 bg-brand-surface/20 dark:bg-darkTheme-surface/20 py-4">
+                <div class="marquee-container w-full overflow-hidden relative">
+                    <div class="flex gap-6" id="reviews-marquee"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ SECTION -->
+        <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+            <div class="text-center space-y-4 mb-10">
+                <span class="text-xs font-bold tracking-widest text-brand-purple dark:text-brand-lime uppercase" id="faq-subtitle">الأسئلة الشائعة</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-dark dark:text-brand-beige" id="faq-title">إجابات لأسئلتك المتكررة</h2>
+            </div>
+            <div class="space-y-4" id="faq-accordion"></div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact" class="py-16 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+            <div class="bg-brand-card dark:bg-darkTheme-card rounded-3xl-custom p-8 sm:p-12 border border-brand-purple/10 shadow-soft text-center relative overflow-hidden">
+                <div class="max-w-2xl mx-auto space-y-6">
+                    <span class="text-xs font-bold tracking-widest text-brand-purple dark:text-brand-lime uppercase" id="contact-subtitle">تواصل معي</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-dark dark:text-brand-beige" id="contact-title">هل لديك مشروع جاهز للانطلاق؟</h2>
+                    <p class="text-brand-muted dark:text-darkTheme-muted text-sm sm:text-base leading-relaxed" id="contact-desc">
+                        اختر تفاصيل مشروعك أدناه للانتقال المباشر للمحادثة عبر واتساب مع رسالة مجهزة تلقائياً، أو تواصل عبر البريد الإلكتروني المباشر.
+                    </p>
+
+                    <!-- Email Copy Box -->
+                    <div class="flex items-center justify-center gap-2 py-2 px-4 rounded-xl bg-brand-surface/50 dark:bg-darkTheme-surface/50 border border-brand-purple/10 max-w-md mx-auto text-xs">
+                        <i class="fa-solid fa-envelope text-brand-purple dark:text-brand-lime"></i>
+                        <span class="font-mono text-brand-dark dark:text-brand-beige">faraharandas1@gmail.com</span>
+                        <button onclick="copyEmail()" class="ms-auto px-3 py-1 rounded-lg bg-brand-purple text-white dark:bg-brand-lime dark:text-brand-dark font-bold hover:opacity-90 transition-opacity">
+                            <span id="copy-btn-text">نسخ البريد</span>
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-start pt-2">
+                        <div>
+                            <label class="block text-xs font-bold mb-1" id="lbl-proj-type">نوع المشروع</label>
+                            <select id="wa-proj-type" class="w-full px-4 py-2.5 rounded-xl bg-brand-surface dark:bg-darkTheme-surface border border-brand-purple/10 text-sm focus:outline-none focus:ring-2 focus:ring-brand-purple"></select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold mb-1" id="lbl-service">الخدمة المطلوبة</label>
+                            <select id="wa-service" class="w-full px-4 py-2.5 rounded-xl bg-brand-surface dark:bg-darkTheme-surface border border-brand-purple/10 text-sm focus:outline-none focus:ring-2 focus:ring-brand-purple"></select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold mb-1" id="lbl-deadline">الموعد المستهدف</label>
+                            <select id="wa-deadline" class="w-full px-4 py-2.5 rounded-xl bg-brand-surface dark:bg-darkTheme-surface border border-brand-purple/10 text-sm focus:outline-none focus:ring-2 focus:ring-brand-purple"></select>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <button onclick="sendWhatsAppMessage()" class="w-full sm:w-auto px-8 py-4 rounded-full bg-green-600 hover:bg-green-700 text-white font-bold shadow-soft transition-all flex items-center justify-center gap-2 text-base">
+                            <i class="fa-brands fa-whatsapp text-xl"></i>
+                            <span id="btn-wa-send">إرسال الرسالة عبر WhatsApp</span>
+                        </button>
+                    </div>
+
+                    <div class="pt-8 border-t border-brand-purple/10 flex items-center justify-center gap-4">
+                        <span class="text-xs font-bold text-brand-muted dark:text-darkTheme-muted" id="social-label">تابعني على:</span>
+                        <div class="flex gap-4">
+                            <a href="https://www.instagram.com/itsfarah.ps/" target="_blank" rel="noopener" class="w-10 h-10 rounded-full bg-brand-surface dark:bg-darkTheme-surface flex items-center justify-center text-brand-purple dark:text-brand-lime hover:scale-110 transition-transform"><i class="fa-brands fa-instagram text-lg"></i></a>
+                            <a href="https://www.facebook.com/profile.php?id=61595786076023" target="_blank" rel="noopener" class="w-10 h-10 rounded-full bg-brand-surface dark:bg-darkTheme-surface flex items-center justify-center text-brand-purple dark:text-brand-lime hover:scale-110 transition-transform"><i class="fa-brands fa-facebook-f text-lg"></i></a>
+                            <a href="https://www.linkedin.com/in/farah-arandas-283194444/" target="_blank" rel="noopener" class="w-10 h-10 rounded-full bg-brand-surface dark:bg-darkTheme-surface flex items-center justify-center text-brand-purple dark:text-brand-lime hover:scale-110 transition-transform"><i class="fa-brands fa-linkedin-in text-lg"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROFILES PLATFORM LINKS -->
+        <section class="py-8 px-4 max-w-7xl mx-auto">
+            <div class="flex flex-wrap justify-center items-center gap-4 sm:gap-8 opacity-80 hover:opacity-100 transition-opacity">
+                <a href="https://mostaql.com/u/Farah_Arandas" target="_blank" rel="noopener" class="px-4 py-2 rounded-xl bg-brand-card dark:bg-darkTheme-card border border-brand-purple/10 text-xs font-bold hover:text-brand-purple dark:hover:text-brand-lime transition-colors">Mostaql</a>
+                <a href="https://khamsat.com/user/farah_arandas" target="_blank" rel="noopener" class="px-4 py-2 rounded-xl bg-brand-card dark:bg-darkTheme-card border border-brand-purple/10 text-xs font-bold hover:text-brand-purple dark:hover:text-brand-lime transition-colors">Khamsat</a>
+                <a href="https://www.linkedin.com/in/farah-arandas-283194444/" target="_blank" rel="noopener" class="px-4 py-2 rounded-xl bg-brand-card dark:bg-darkTheme-card border border-brand-purple/10 text-xs font-bold hover:text-brand-purple dark:hover:text-brand-lime transition-colors">LinkedIn</a>
+                <a href="https://www.instagram.com/itsfarah.ps/" target="_blank" rel="noopener" class="px-4 py-2 rounded-xl bg-brand-card dark:bg-darkTheme-card border border-brand-purple/10 text-xs font-bold hover:text-brand-purple dark:hover:text-brand-lime transition-colors">Instagram</a>
+                <a href="https://www.facebook.com/profile.php?id=61595786076023" target="_blank" rel="noopener" class="px-4 py-2 rounded-xl bg-brand-card dark:bg-darkTheme-card border border-brand-purple/10 text-xs font-bold hover:text-brand-purple dark:hover:text-brand-lime transition-colors">Facebook</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-brand-purple/10 py-8 px-4 text-center text-xs text-brand-muted dark:text-darkTheme-muted">
+        <p>© <span id="year-span">2026</span> Farah Arandas. All rights reserved.</p>
+    </footer>
+
+    <!-- CASE STUDY MODAL -->
+    <div id="project-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-brand-card dark:bg-darkTheme-card w-full max-w-4xl rounded-2xl-custom border border-brand-purple/20 overflow-hidden shadow-2xl relative my-8 max-h-[90vh] flex flex-col">
+            <button onclick="closeModal()" class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-black transition-colors" aria-label="Close modal">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="p-6 sm:p-8 overflow-y-auto space-y-6" id="modal-body"></div>
+        </div>
+    </div>
+
+    <!-- ATS SINGLE PAGE PRINTABLE CV MODAL -->
+    <div id="cv-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto no-print">
+        <div class="bg-white text-black w-full max-w-3xl rounded-2xl p-6 sm:p-10 relative overflow-y-auto max-h-[90vh]">
+            <div class="flex items-center justify-between pb-4 mb-6 border-b border-gray-200">
+                <h3 class="font-bold text-lg text-gray-800" id="cv-modal-header-title">معاينة السيرة الذاتية (A4 ATS Ready)</h3>
+                <div class="flex items-center gap-2">
+                    <button onclick="window.print()" class="px-4 py-2 rounded-lg bg-purple-700 text-white font-bold text-xs flex items-center gap-1 hover:bg-purple-800">
+                        <i class="fa-solid fa-print"></i> <span id="cv-modal-print-btn">طباعة / حفظ كـ PDF</span>
+                    </button>
+                    <button onclick="closeCVModal()" class="w-8 h-8 rounded-full bg-gray-200 text-gray-700 flex items-center justify-center">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="printable-cv" class="space-y-6 text-start text-sm">
+                <div class="border-b-2 border-purple-800 pb-4">
+                    <h1 class="text-2xl font-bold text-purple-900" id="cv-name">فرح عرندس</h1>
+                    <p class="text-sm font-semibold text-gray-700 mt-0.5" id="cv-title">مصممة جرافيك وهوية بصرية</p>
+                    <div class="flex flex-wrap gap-4 text-xs text-gray-600 mt-2">
+                        <span><i class="fa-solid fa-location-dot"></i> <span id="cv-loc">غزة، فلسطين</span></span>
+                        <span><i class="fa-solid fa-envelope"></i> faraharandas1@gmail.com</span>
+                        <span><i class="fa-solid fa-phone"></i> <span dir="ltr" class="inline-block">+970 595 402 383</span></span>
+                    </div>
+                </div>
+
+                <div>
+                    <h2 class="text-xs font-bold uppercase tracking-wider text-purple-900 border-b border-gray-200 pb-1 mb-2" id="cv-summary-h">الملخص المهني</h2>
+                    <p class="text-xs text-gray-700 leading-relaxed" id="cv-summary-t">
+                        مصممة جرافيك متخصصة بالهويات البصرية وتصاميم السوشيال ميديا للمتاجر والمشاريع الناشئة.
+                    </p>
+                </div>
+
+                <div>
+                    <h2 class="text-xs font-bold uppercase tracking-wider text-purple-900 border-b border-gray-200 pb-1 mb-2" id="cv-edu-h">التعليم والتخصص</h2>
+                    <div class="text-xs text-gray-700" id="cv-edu-t">
+                        بكالوريوس تكنولوجيا الوسائط المتعددة (Multimedia Technology) - الكلية الجامعية للعلوم التطبيقية (UCAS)، غزة
+                    </div>
+                </div>
+
+                <div>
+                    <h2 class="text-xs font-bold uppercase tracking-wider text-purple-900 border-b border-gray-200 pb-1 mb-2" id="cv-exp-h">الخبرة العملية</h2>
+                    <div class="text-xs text-gray-700 space-y-1">
+                        <div class="flex justify-between font-bold">
+                            <span id="cv-exp-role">مصممة جرافيك مستقلة</span>
+                            <span id="cv-exp-date" class="text-gray-500 font-normal">سبتمبر 2023 - الحالي</span>
+                        </div>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1 pt-1" id="cv-exp-list"></ul>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <h2 class="text-xs font-bold uppercase tracking-wider text-purple-900 border-b border-gray-200 pb-1 mb-1" id="cv-skills-h">البرامج والمهارات</h2>
+                        <p class="text-xs text-gray-700" id="cv-skills-t">Photoshop, Illustrator, InDesign, After Effects, Branding, Social Media, Packaging.</p>
+                    </div>
+                    <div>
+                        <h2 class="text-xs font-bold uppercase tracking-wider text-purple-900 border-b border-gray-200 pb-1 mb-1" id="cv-lang-h">اللغات</h2>
+                        <p class="text-xs text-gray-700" id="cv-lang-t">العربية (اللغة الأم) | الإنجليزية (متقدم)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CLIENT SIDE LOGIC ENGINE -->
+    <script>
+        let currentLang = localStorage.getItem('farah_lang') || 'ar';
+        let currentFilter = 'all';
+
+        const TRANSLATIONS = {
+            ar: {
+                navBrandTitle: "مصممة جرافيك",
+                navWork: "أعمالي",
+                navServices: "خدماتي",
+                navReviews: "الآراء",
+                navContact: "تواصل معي",
+                navCv: "السيرة الذاتية",
+                heroStatus: "متاحة لاستلام المشاريع الجديدة",
+                heroGreeting: "أهلاً بك،",
+                heroBtnWork: "شاهد أعمالي",
+                heroBtnCv: "تحميل السيرة الذاتية",
+                swSectionTitle: "برامج التصميم المعتمدة",
+                workSubtitle: "معرض الأعمال",
+                workTitle: "أعمال مختارة",
+                servicesSubtitle: "ماذا أقدم؟",
+                servicesTitle: "خدمات تصميم احترافية لتنمية مشروعك",
+                btnServiceReq: "اطلب هذه الخدمة عبر واتساب",
+                reviewsSubtitle: "آراء العملاء",
+                reviewsTitle: "شركاء نجاح، مش مجرد عملاء",
+                faqSubtitle: "الأسئلة الشائعة",
+                faqTitle: "إجابات لأسئلتك المتكررة",
+                contactSubtitle: "تواصل معي",
+                contactTitle: "هل لديك مشروع جاهز للانطلاق؟",
+                contactDesc: "اختر تفاصيل مشروعك أدناه للانتقال المباشر للمحادثة عبر واتساب مع رسالة مجهزة تلقائياً، أو تواصل عبر البريد الإلكتروني المباشر.",
+                lblProjType: "نوع المشروع",
+                lblService: "الخدمة المطلوبة",
+                lblDeadline: "الموعد المستهدف",
+                btnWaSend: "إرسال الرسالة عبر WhatsApp",
+                socialLabel: "تابعني على:",
+                copyBtn: "نسخ البريد",
+                copiedText: "تم النسخ!"
+            },
+            en: {
+                navBrandTitle: "Graphic Designer",
+                navWork: "Work",
+                navServices: "Services",
+                navReviews: "Reviews",
+                navContact: "Contact",
+                navCv: "Download CV",
+                heroStatus: "Available for new projects",
+                heroGreeting: "Welcome,",
+                heroBtnWork: "View My Work",
+                heroBtnCv: "Download CV",
+                swSectionTitle: "Supported Software",
+                workSubtitle: "Portfolio",
+                workTitle: "Selected Featured Work",
+                servicesSubtitle: "Services",
+                servicesTitle: "Professional Design Services to Elevate Your Brand",
+                btnServiceReq: "Request Service on WhatsApp",
+                reviewsSubtitle: "Testimonials",
+                reviewsTitle: "What Clients Say About Working With Me",
+                faqSubtitle: "FAQ",
+                faqTitle: "Frequently Asked Questions",
+                contactSubtitle: "Get In Touch",
+                contactTitle: "Have a Project Ready to Launch?",
+                contactDesc: "Select your project specifics below to generate a pre-filled direct WhatsApp message, or reach out via direct email.",
+                lblProjType: "Project Type",
+                lblService: "Service Needed",
+                lblDeadline: "Target Deadline",
+                btnWaSend: "Send Message via WhatsApp",
+                socialLabel: "Follow me on:",
+                copyBtn: "Copy Email",
+                copiedText: "Copied!"
+            }
+        };
+
+        window.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+            renderAll();
+            initCounters();
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closeModal();
+                    closeCVModal();
+                }
+            });
+        });
+
+        function initTheme() {
+            if (!localStorage.getItem('theme')) {
+                localStorage.setItem('theme', 'dark');
+            }
+            if (localStorage.getItem('theme') === 'dark') {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        }
+
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'ar' ? 'en' : 'ar';
+            localStorage.setItem('farah_lang', currentLang);
+            document.documentElement.lang = currentLang;
+            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+            renderAll();
+            initCounters();
+        }
+
+        function renderAll() {
+            const lang = currentLang;
+            const t = TRANSLATIONS[lang];
+
+            document.getElementById('lang-btn-text').innerText = lang === 'ar' ? 'English' : 'عربي';
+            document.getElementById('nav-brand-name').innerText = PORTFOLIO_DATA.personal.name[lang];
+            document.getElementById('nav-brand-title').innerText = t.navBrandTitle;
+            document.getElementById('nav-link-work').innerText = t.navWork;
+            document.getElementById('nav-link-services').innerText = t.navServices;
+            document.getElementById('nav-link-reviews').innerText = t.navReviews;
+            document.getElementById('nav-link-contact').innerText = t.navContact;
+            document.getElementById('nav-cv-btn').innerText = t.navCv;
+
+            document.getElementById('m-nav-work').innerText = t.navWork;
+            document.getElementById('m-nav-services').innerText = t.navServices;
+            document.getElementById('m-nav-reviews').innerText = t.navReviews;
+            document.getElementById('m-nav-contact').innerText = t.navContact;
+
+            document.getElementById('hero-status').innerText = t.heroStatus;
+            document.getElementById('hero-greeting').innerText = t.heroGreeting;
+            document.getElementById('hero-name-display').innerText = PORTFOLIO_DATA.personal.name[lang];
+            document.getElementById('hero-tagline').innerText = PORTFOLIO_DATA.personal.bio[lang];
+            document.getElementById('hero-btn-work').innerText = t.heroBtnWork;
+            document.getElementById('hero-btn-cv').innerText = t.heroBtnCv;
+            document.getElementById('sw-section-title').innerText = t.swSectionTitle;
+
+            renderStats();
+            renderSoftwareIcons();
+            renderProjectsGrid();
+
+            document.getElementById('work-subtitle').innerText = t.workSubtitle;
+            document.getElementById('work-title').innerText = t.workTitle;
+
+            document.getElementById('services-subtitle').innerText = t.servicesSubtitle;
+            document.getElementById('services-title').innerText = t.servicesTitle;
+            renderServices();
+
+            document.getElementById('reviews-subtitle').innerText = t.reviewsSubtitle;
+            document.getElementById('reviews-title').innerText = t.reviewsTitle;
+            renderReviews();
+
+            document.getElementById('faq-subtitle').innerText = t.faqSubtitle;
+            document.getElementById('faq-title').innerText = t.faqTitle;
+            renderFAQ();
+
+            document.getElementById('contact-subtitle').innerText = t.contactSubtitle;
+            document.getElementById('contact-title').innerText = t.contactTitle;
+            document.getElementById('contact-desc').innerText = t.contactDesc;
+            document.getElementById('lbl-proj-type').innerText = t.lblProjType;
+            document.getElementById('lbl-service').innerText = t.lblService;
+            document.getElementById('lbl-deadline').innerText = t.lblDeadline;
+            document.getElementById('btn-wa-send').innerText = t.btnWaSend;
+            document.getElementById('social-label').innerText = t.socialLabel;
+            document.getElementById('copy-btn-text').innerText = t.copyBtn;
+
+            renderDropdowns();
+            renderCV();
+        }
+
+        function renderDropdowns() {
+            const lang = currentLang;
+            const options = PORTFOLIO_DATA.contactOptions;
+
+            document.getElementById('wa-proj-type').innerHTML = options.projTypes.map(opt => `<option value="${opt[lang]}">${opt[lang]}</option>`).join('');
+            document.getElementById('wa-service').innerHTML = options.services.map(opt => `<option value="${opt[lang]}">${opt[lang]}</option>`).join('');
+            document.getElementById('wa-deadline').innerHTML = options.deadlines.map(opt => `<option value="${opt[lang]}">${opt[lang]}</option>`).join('');
+        }
+
+        function renderCV() {
+            const lang = currentLang;
+            const cvData = PORTFOLIO_DATA.cv;
+            const pData = PORTFOLIO_DATA.personal;
+
+            document.getElementById('cv-modal-header-title').innerText = cvData.modalTitle[lang];
+            document.getElementById('cv-modal-print-btn').innerText = cvData.printBtn[lang];
+            document.getElementById('cv-name').innerText = pData.name[lang];
+            document.getElementById('cv-title').innerText = pData.title[lang];
+            document.getElementById('cv-loc').innerText = pData.location[lang];
+            document.getElementById('cv-summary-h').innerText = cvData.summaryHeading[lang];
+            document.getElementById('cv-summary-t').innerText = cvData.summaryText[lang];
+            document.getElementById('cv-edu-h').innerText = cvData.educationHeading[lang];
+            document.getElementById('cv-edu-t').innerText = cvData.educationText[lang];
+            document.getElementById('cv-exp-h').innerText = cvData.experienceHeading[lang];
+            document.getElementById('cv-exp-role').innerText = cvData.expRole[lang];
+            document.getElementById('cv-exp-date').innerText = cvData.expDuration[lang];
+            document.getElementById('cv-exp-list').innerHTML = cvData.expPoints.map(pt => `<li>${pt[lang]}</li>`).join('');
+            document.getElementById('cv-skills-h').innerText = cvData.skillsHeading[lang];
+            document.getElementById('cv-skills-t').innerText = cvData.skillsText;
+            document.getElementById('cv-lang-h').innerText = cvData.languagesHeading[lang];
+            document.getElementById('cv-lang-t').innerText = cvData.languagesText[lang];
+        }
+
+        function renderStats() {
+            const container = document.getElementById('stats-grid');
+            const lang = currentLang;
+            container.innerHTML = PORTFOLIO_DATA.stats.map(s => `
+                <div class="bg-brand-card dark:bg-darkTheme-card p-6 rounded-2xl-custom border border-brand-purple/10 shadow-soft text-center hover:scale-105 transition-transform duration-300">
+                    <div class="w-10 h-10 mx-auto mb-3 rounded-full bg-brand-surface dark:bg-darkTheme-surface flex items-center justify-center text-brand-purple dark:text-brand-lime text-base">
+                        <i class="fa-solid ${s.icon}"></i>
+                    </div>
+                    <div class="text-3xl sm:text-4xl font-black text-brand-purple dark:text-brand-lime tracking-tight mb-1">
+                        <span class="counter" data-target="${s.target}">0</span>${s.suffix}
+                    </div>
+                    <div class="text-xs font-medium text-brand-muted dark:text-darkTheme-muted">${s.label[lang]}</div>
+                </div>
+            `).join('');
+        }
+
+        function initCounters() {
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                let current = 0;
+                const increment = target / 30;
+
+                const updateCounter = () => {
+                    current += increment;
+                    if (current < target) {
+                        counter.innerText = Math.ceil(current);
+                        setTimeout(updateCounter, 40);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCounter();
+            });
+        }
+
+        function renderSoftwareIcons() {
+            const grid = document.getElementById('software-icons-grid');
+            const lang = currentLang;
+            grid.innerHTML = PORTFOLIO_DATA.softwareIcons.map(sw => `
+                <div class="p-4 rounded-xl bg-brand-surface/50 dark:bg-darkTheme-surface/50 border border-brand-purple/10 flex items-center gap-3 hover:scale-105 transition-transform">
+                    <div class="w-10 h-10 rounded-xl overflow-hidden shrink-0 flex items-center justify-center bg-transparent">
+                        ${sw.name === 'Photoshop' ? '<img src="img/ps.png" alt="Photoshop" class="w-full h-full object-cover rounded-xl">' : 
+                          sw.name === 'Illustrator' ? '<img src="img/ai.png" alt="Illustrator" class="w-full h-full object-cover rounded-xl">' :
+                          sw.name === 'InDesign' ? '<img src="img/id.png" alt="InDesign" class="w-full h-full object-cover rounded-xl">' :
+                          sw.name === 'After Effects' ? '<img src="img/ae.png" alt="After Effects" class="w-full h-full object-cover rounded-xl">' :
+                          `<div class="w-full h-full flex items-center justify-center font-black text-white text-base rounded-xl" style="background-color: ${sw.color}">${sw.icon}</div>`}
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-xs text-brand-dark dark:text-brand-beige">${sw.name}</h4>
+                        <p class="text-[10px] text-brand-muted dark:text-darkTheme-muted">${sw.desc[lang]}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterProjects(category) {
+            currentFilter = category;
+            
+            // Update filter buttons styling
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => {
+                if(btn.getAttribute('data-filter') === category) {
+                    btn.className = "filter-btn px-5 py-2 rounded-full text-xs font-bold bg-brand-purple text-white dark:bg-brand-lime dark:text-brand-dark transition-all shadow-sm";
+                } else {
+                    btn.className = "filter-btn px-5 py-2 rounded-full text-xs font-bold bg-brand-surface dark:bg-darkTheme-surface text-brand-text dark:text-darkTheme-text hover:bg-brand-purple/20 transition-all";
+                }
+            });
+
+            renderProjectsGrid();
+        }
+
+        function renderProjectsGrid() {
+            const container = document.getElementById('projects-grid');
+            const lang = currentLang;
+
+            const filteredProjects = currentFilter === 'all' 
+                ? PORTFOLIO_DATA.projects 
+                : PORTFOLIO_DATA.projects.filter(p => p.category === currentFilter);
+
+            container.innerHTML = filteredProjects.map(p => `
+                <div onclick="openCaseStudy('${p.id}')" class="group bg-brand-card dark:bg-darkTheme-card rounded-3xl-custom border border-brand-purple/10 overflow-hidden shadow-soft hover:shadow-hover hover:-translate-y-2 transition-all duration-300 cursor-pointer flex flex-col justify-between">
+                    <div>
+                        <div class="relative aspect-[4/3] overflow-hidden bg-brand-surface dark:bg-darkTheme-surface">
+                            <img src="${p.coverImage}" alt="${p.title[lang]}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                            <span class="absolute top-4 start-4 px-3 py-1 rounded-full text-[10px] font-bold bg-brand-dark/80 text-brand-lime backdrop-blur-sm">
+                                ${p.categoryLabel[lang]}
+                            </span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-base font-bold text-brand-dark dark:text-brand-beige group-hover:text-brand-purple dark:group-hover:text-brand-lime transition-colors mb-2">
+                                ${p.title[lang]}
+                            </h3>
+                            <p class="text-xs text-brand-muted dark:text-darkTheme-muted line-clamp-2">
+                                ${p.brief[lang]}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-6 pt-0 flex items-center justify-between text-xs text-brand-purple dark:text-brand-lime font-bold">
+                        <span>تفاصيل المشروع</span>
+                        <i class="fa-solid fa-arrow-left rtl:rotate-0 ltr:rotate-180"></i>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderServices() {
+            const grid = document.getElementById('services-grid');
+            const lang = currentLang;
+            grid.innerHTML = PORTFOLIO_DATA.services.map(s => `
+                <div class="bg-brand-card dark:bg-darkTheme-card p-8 rounded-2xl-custom border border-brand-purple/10 shadow-soft flex flex-col justify-between hover:border-brand-purple/30 transition-all">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-brand-surface dark:bg-darkTheme-surface text-brand-purple dark:text-brand-lime flex items-center justify-center text-xl font-bold mb-6">
+                            <i class="fa-solid ${s.icon}"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-brand-dark dark:text-brand-beige mb-3">${s.title[lang]}</h3>
+                        <p class="text-xs text-brand-muted dark:text-darkTheme-muted leading-relaxed mb-6">${s.desc[lang]}</p>
+                    </div>
+                    <button onclick="requestService('${s.title[lang]}')" class="w-full py-3 rounded-full border border-brand-purple/20 text-brand-purple dark:text-brand-lime font-bold text-xs hover:bg-brand-purple hover:text-white dark:hover:bg-brand-lime dark:hover:text-brand-dark transition-all flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp"></i>
+                        <span>${TRANSLATIONS[lang].btnServiceReq}</span>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+       function renderReviews() {
+            const marquee = document.getElementById('reviews-marquee');
+            const lang = currentLang;
+            
+            // زيادة المسافة بين الكروت (gap-8) وإضافة حشوة مناسبة
+            marquee.className = lang === 'ar' ? 'animate-marquee-rtl flex gap-8' : 'animate-marquee-ltr flex gap-8';
+
+            const cardsHTML = PORTFOLIO_DATA.reviews.map(r => `
+                <div class="w-80 sm:w-96 shrink-0 bg-brand-card dark:bg-darkTheme-card p-6 rounded-2xl-custom border border-brand-purple/10 shadow-soft flex flex-col justify-between my-2">
+                    <div class="space-y-3">
+                        <div class="flex text-amber-400 text-xs gap-1">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-xs sm:text-sm text-brand-muted dark:text-darkTheme-muted leading-relaxed">"${r.comment[lang]}"</p>
+                    </div>
+                    <div class="pt-4 mt-4 border-t border-brand-purple/5 flex items-center justify-between text-xs">
+                        <span class="font-bold text-brand-dark dark:text-brand-beige">${r.client[lang]}</span>
+                        <span class="text-[10px] text-brand-muted dark:text-darkTheme-muted">${r.country[lang]}</span>
+                    </div>
+                </div>
+            `).join('');
+
+            marquee.innerHTML = cardsHTML + cardsHTML + cardsHTML;
+        }
+        function renderFAQ() {
+            const container = document.getElementById('faq-accordion');
+            const lang = currentLang;
+            container.innerHTML = PORTFOLIO_DATA.faqs.map((faq, idx) => `
+                <div class="bg-brand-card dark:bg-darkTheme-card rounded-xl-custom border border-brand-purple/10 overflow-hidden">
+                    <button onclick="toggleFAQ(${idx})" class="w-full p-5 text-start font-bold text-sm text-brand-dark dark:text-brand-beige flex items-center justify-between gap-4">
+                        <span>${faq.q[lang]}</span>
+                        <i id="faq-icon-${idx}" class="fa-solid fa-chevron-down text-xs text-brand-purple dark:text-brand-lime transition-transform"></i>
+                    </button>
+                    <div id="faq-ans-${idx}" class="hidden p-5 pt-0 text-xs text-brand-muted dark:text-darkTheme-muted leading-relaxed border-t border-brand-purple/5">
+                        ${faq.a[lang]}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleFAQ(idx) {
+            const ans = document.getElementById(`faq-ans-${idx}`);
+            const icon = document.getElementById(`faq-icon-${idx}`);
+            if (ans.classList.contains('hidden')) {
+                ans.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                ans.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        function openCaseStudy(projId) {
+            const proj = PORTFOLIO_DATA.projects.find(p => p.id === projId);
+            if (!proj) return;
+
+            const lang = currentLang;
+            const modalBody = document.getElementById('modal-body');
+            modalBody.innerHTML = `
+                <div class="space-y-4">
+                    <span class="px-3 py-1 rounded-full text-[10px] font-bold bg-brand-purple text-white inline-block">${proj.categoryLabel[lang]}</span>
+                    <h2 class="text-2xl font-extrabold text-brand-dark dark:text-brand-beige">${proj.title[lang]}</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs bg-brand-surface/50 dark:bg-darkTheme-surface/50 p-4 rounded-xl-custom">
+                    <div><strong class="text-brand-purple dark:text-brand-lime">الملخص:</strong> ${proj.brief[lang]}</div>
+                    <div><strong class="text-brand-purple dark:text-brand-lime">التحدي:</strong> ${proj.challenge[lang]}</div>
+                    <div><strong class="text-brand-purple dark:text-brand-lime">الدور:</strong> ${proj.role[lang]}</div>
+                    <div><strong class="text-brand-purple dark:text-brand-lime">الأدوات:</strong> ${proj.tools.join(', ')}</div>
+                </div>
+
+                <div class="space-y-3">
+                    <h4 class="font-bold text-xs text-brand-dark dark:text-brand-beige">معرض الصور:</h4>
+                    <div class="grid grid-cols-1 gap-6">
+                        ${proj.gallery.map((imgUrl) => `
+                            <div class="w-full bg-brand-surface dark:bg-darkTheme-surface rounded-xl overflow-hidden border border-brand-purple/10 flex items-center justify-center p-2">
+                                <img src="${imgUrl}" class="max-h-[600px] w-auto h-auto object-contain rounded-lg" />
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('project-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('project-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function copyEmail() {
+            const email = "faraharandas1@gmail.com";
+            navigator.clipboard.writeText(email).then(() => {
+                const btnText = document.getElementById('copy-btn-text');
+                const originalText = btnText.innerText;
+                btnText.innerText = TRANSLATIONS[currentLang].copiedText;
+                setTimeout(() => {
+                    btnText.innerText = originalText;
+                }, 2000);
+            });
+        }
+
+        function sendWhatsAppMessage() {
+            const type = document.getElementById('wa-proj-type').value;
+            const service = document.getElementById('wa-service').value;
+            const deadline = document.getElementById('wa-deadline').value;
+
+            const textAr = `مرحباً فرح، أود الاستفسار عن مشروع:\n- النوع: ${type}\n- الخدمة: ${service}\n- الموعد المستهدف: ${deadline}`;
+            const textEn = `Hello Farah, I would like to inquire about a project:\n- Type: ${type}\n- Service: ${service}\n- Target Deadline: ${deadline}`;
+
+            const msg = currentLang === 'ar' ? textAr : textEn;
+            const url = `https://wa.me/970595402383?text=${encodeURIComponent(msg)}`;
+            window.open(url, '_blank');
+        }
+
+        function requestService(serviceTitle) {
+            const msg = currentLang === 'ar' 
+                ? `مرحباً فرح، يرجي تزويدي بتفاصيل وأسعار خدمة: (${serviceTitle})`
+                : `Hello Farah, please provide details and quote for: (${serviceTitle})`;
+            const url = `https://wa.me/970595402383?text=${encodeURIComponent(msg)}`;
+            window.open(url, '_blank');
+        }
+
+        function openPrintableCV() {
+            document.getElementById('cv-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCVModal() {
+            document.getElementById('cv-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+    </script>
+</body>
+</html>
